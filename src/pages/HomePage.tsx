@@ -22,9 +22,10 @@ const BENEFICIOS = [
 ];
 
 export default function HomePage() {
-  // Hand-picked featured products (mix of integrales and keto, sweet and salty)
-  const featuredProductsIds = [11, 20, 22, 57, 59, 7, 47, 26]; // Pan Integral, Brownie, Carrot Cake, Pan Dulce keto, Rogel keto, Focaccia, Alfajor keto, Pepas
-  const featuredProducts = PRODUCTS.filter(p => featuredProductsIds.includes(p.id));
+  const featuredProductsIds = [11, 5, 15, 40]; // Panes, Crackers, Pizzetas, Ñoquis
+  const featuredProducts = featuredProductsIds
+    .map((id) => PRODUCTS.find((product) => product.id === id))
+    .filter((product): product is NonNullable<typeof product> => Boolean(product));
   const [featuredIndex, setFeaturedIndex] = useState(0);
 
   useEffect(() => {
@@ -82,7 +83,7 @@ export default function HomePage() {
               transition={{ duration: 0.6 }}
               className="relative group overflow-hidden rounded-3xl aspect-[4/3] md:aspect-square lg:aspect-[4/3] cursor-pointer shadow-md"
             >
-              <img src="/images/family-panes-integrales.png" alt="Productos Integrales" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <img src="/images/Arm%C3%A1%20tu%20Box%20Integral%201.png" alt="Productos Integrales" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col p-8 md:p-10">
                 <div className="mt-auto max-w-md w-full grid grid-rows-[minmax(72px,auto)_minmax(84px,auto)_auto] md:grid-rows-[minmax(88px,auto)_minmax(84px,auto)_auto] gap-3">
                   <h3 className="font-serif text-3xl md:text-4xl font-bold text-white flex items-end">PRODUCTOS<br />INTEGRALES</h3>
@@ -103,7 +104,7 @@ export default function HomePage() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="relative group overflow-hidden rounded-3xl aspect-[4/3] md:aspect-square lg:aspect-[4/3] cursor-pointer shadow-md"
             >
-              <img src="/images/family-panes-keto.png" alt="Productos Keto" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <img src="/images/panAlmendras.jpeg" alt="Productos Keto" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col p-8 md:p-10">
                 <div className="mt-auto max-w-md w-full grid grid-rows-[minmax(72px,auto)_minmax(84px,auto)_auto] md:grid-rows-[minmax(88px,auto)_minmax(84px,auto)_auto] gap-3">
                   <h3 className="font-serif text-3xl md:text-4xl font-bold text-white flex items-end">PRODUCTOS<br />KETO</h3>
@@ -126,16 +127,17 @@ export default function HomePage() {
         badge="DELICIA INTEGRAL"
         subtitle="PARA DISFRUTAR EN CUALQUIER MOMENTO"
         title="PANES SABROSOS"
-        text="Descubrí nuestra variedad de panes integrales, pensados para acompañar cualquier momento. Sabores únicos, combinaciones que sorprenden y una textura casera que marca la diferencia. Desde opciones clásicas hasta panes saborizados, todo está hecho para disfrutar y compartir."
-        imageSrc="/images/family-panes-integrales.png"
+        text="Descubrí nuestra variedad de panes integrales o Keto, pensados para acompañar cualquier momento. Sabores únicos, combinaciones que sorprenden y una textura casera que marca la diferencia. Desde opciones clásicas hasta panes saborizados, todo está hecho para disfrutar y compartir."
+        imageSrc="/images/TRIOPANESKETO-1.jpg"
         imageAlt="Variedad de panes artesanales de sabores"
+        imageClassName="object-cover object-center h-[185%] -translate-y-48 md:-translate-y-80"
       />
       
       <ProductHighlight 
         badge="LA MERIENDA DE CADA DÍA"
         title="ALGO RICO, SIEMPRE"
         text="Descubrí nuestra variedad de productos dulces, pensados para disfrutar en cualquier momento. Sabores que se sienten, combinaciones que sorprenden y una calidad casera que se nota en cada bocado. Perfectos para cortar el día con algo realmente rico."
-        imageSrc="/images/family-brownies-budines.png"
+        imageSrc="/images/rogel-keto-scaled.jpg"
         imageAlt="Brownie integral de chocolate"
         inverted={true}
       />

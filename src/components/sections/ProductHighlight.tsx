@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 
 interface ProductHighlightProps {
   badge: string;
@@ -8,6 +9,8 @@ interface ProductHighlightProps {
   text: string;
   imageSrc: string;
   imageAlt: string;
+  imageClassName?: string;
+  imageWrapperClassName?: string;
   inverted?: boolean;
 }
 
@@ -18,6 +21,8 @@ export default function ProductHighlight({
   text, 
   imageSrc, 
   imageAlt, 
+  imageClassName,
+  imageWrapperClassName,
   inverted = false 
 }: ProductHighlightProps) {
   return (
@@ -32,12 +37,12 @@ export default function ProductHighlight({
             transition={{ duration: 0.7, ease: "easeOut" }}
             className="w-full lg:w-1/2"
           >
-            <div className="relative aspect-square md:aspect-[4/3] rounded-2xl overflow-hidden shadow-lg">
+            <div className={cn("relative aspect-square md:aspect-[4/3] rounded-2xl overflow-hidden shadow-lg", imageWrapperClassName)}>
               <img 
                 src={imageSrc} 
                 alt={imageAlt}
                 loading="lazy"
-                className="w-full h-full object-cover"
+                className={cn("w-full h-full object-cover", imageClassName)}
               />
             </div>
           </motion.div>

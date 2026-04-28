@@ -7,10 +7,59 @@ import { buildWhatsAppLink } from "@/lib/constants";
 import { formatARS } from "@/lib/utils";
 import { MessageCircle } from "lucide-react";
 
+
 interface ProductCardProps {
   product: Product;
   useCatalogAccent?: boolean;
 }
+
+
+// Simple image gallery/carrusel for modal
+function ProductImageGallery({ images, name }: { images: string[]; name: string }) {
+  const [current, setCurrent] = useState(0);
+  if (!images || images.length === 0) return null;
+  const prev = () => setCurrent((c) => (c === 0 ? images.length - 1 : c - 1));
+  const next = () => setCurrent((c) => (c === images.length - 1 ? 0 : c + 1));
+  return (
+    <div className="relative w-full h-full flex items-center justify-center">
+      <button
+        onClick={prev}
+        className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-black rounded-full p-1 shadow-md z-10"
+        style={{ display: images.length > 1 ? "block" : "none" }}
+        aria-label="Anterior"
+      >
+        &#8592;
+      </button>
+      <img
+        src={images[current]}
+        alt={name}
+        className="max-h-[60vh] max-w-full object-contain rounded-xl shadow-md bg-white"
+        style={{ transition: "all 0.3s" }}
+      />
+      <button
+        onClick={next}
+        className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-black rounded-full p-1 shadow-md z-10"
+        style={{ display: images.length > 1 ? "block" : "none" }}
+        aria-label="Siguiente"
+      >
+        &#8594;
+      </button>
+      {images.length > 1 && (
+        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1">
+          {images.map((img, idx) => (
+            <button
+              key={img}
+              onClick={() => setCurrent(idx)}
+              className={`w-2 h-2 rounded-full ${idx === current ? "bg-primary" : "bg-gray-300"}`}
+              aria-label={`Imagen ${idx + 1}`}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 
 export default function ProductCard({ product, useCatalogAccent = false }: ProductCardProps) {
   const [modalOpen, setModalOpen] = useState(false);
@@ -37,7 +86,7 @@ export default function ProductCard({ product, useCatalogAccent = false }: Produ
       >
         <div className="relative aspect-square overflow-hidden bg-secondary/30">
           <img 
-            src={product.image} 
+            src={product.images[0]} 
             alt={product.name} 
             loading="lazy"
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
@@ -60,7 +109,6 @@ export default function ProductCard({ product, useCatalogAccent = false }: Produ
         </div>
         <div className="p-6 flex flex-col flex-grow">
           <h3 className="font-serif text-xl font-semibold text-foreground mb-2 line-clamp-2">{product.name}</h3>
-          
           <div className="mt-auto pt-4 flex items-center justify-between">
             <span className="font-bold text-2xl text-foreground">{formatARS(product.price)}</span>
             <div className="flex gap-2">
@@ -90,12 +138,9 @@ export default function ProductCard({ product, useCatalogAccent = false }: Produ
           <DialogTitle className="sr-only">{product.name}</DialogTitle>
           <DialogDescription className="sr-only">{product.description}</DialogDescription>
           <div className="flex flex-col md:flex-row h-full">
-            <div className="w-full md:w-1/2 bg-secondary/20 relative aspect-[4/3] md:aspect-auto md:min-h-0">
-              <img 
-                src={product.image} 
-                alt={product.name}
-                className="w-full h-full object-cover absolute inset-0"
-              />
+            <div className="w-full md:w-1/2 bg-secondary/20 relative aspect-[4/3] md:aspect-auto md:min-h-0 flex items-center justify-center">
+              {/* Gallery/Carrusel */}
+              <ProductImageGallery images={product.images} name={product.name} />
             </div>
             <div className="w-full md:w-1/2 flex flex-col p-5 sm:p-6 md:p-10 overflow-y-auto min-h-0">
               <div className="flex gap-2 mb-6">
@@ -106,19 +151,15 @@ export default function ProductCard({ product, useCatalogAccent = false }: Produ
                   {product.subcategory.toUpperCase()}
                 </Badge>
               </div>
-              
               <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-4 leading-tight">
                 {product.name}
               </h2>
-              
               <p className={`text-3xl font-bold mb-6 ${useCatalogAccent ? "text-[hsl(var(--catalog-accent))]" : "text-foreground"}`}>
                 {formatARS(product.price)}
               </p>
-              
               <p className="text-base sm:text-lg text-muted-foreground mb-6 md:mb-8 leading-relaxed">
                 {product.description}
               </p>
-              
             </div>
           </div>
         </DialogContent>
