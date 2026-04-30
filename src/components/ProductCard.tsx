@@ -21,7 +21,7 @@ function ProductImageGallery({ images, name }: { images: string[]; name: string 
   const prev = () => setCurrent((c) => (c === 0 ? images.length - 1 : c - 1));
   const next = () => setCurrent((c) => (c === images.length - 1 ? 0 : c + 1));
   return (
-    <div className="relative w-full h-full flex items-center justify-center">
+    <div className="relative w-full h-full p-3 sm:p-4 flex items-center justify-center">
       <button
         onClick={prev}
         className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-black rounded-full p-1 shadow-md z-10"
@@ -33,7 +33,7 @@ function ProductImageGallery({ images, name }: { images: string[]; name: string 
       <img
         src={images[current]}
         alt={name}
-        className="max-h-[60vh] max-w-full object-contain rounded-xl shadow-md bg-white"
+        className="w-full h-full max-h-[52dvh] sm:max-h-[60vh] object-contain rounded-xl shadow-md bg-white"
         style={{ transition: "all 0.3s" }}
       />
       <button
@@ -78,7 +78,7 @@ export default function ProductCard({ product, useCatalogAccent = false }: Produ
   return (
     <>
       <div 
-        className={`group bg-card rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border flex flex-col h-full cursor-pointer cursor-pointer-card ${
+        className={`group bg-card rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 border flex flex-col h-full min-w-0 max-w-full cursor-pointer cursor-pointer-card ${
           useCatalogAccent ? "border-border hover:border-[hsl(var(--catalog-accent))]" : "border-border"
         }`}
         onClick={() => setModalOpen(true)}
@@ -107,7 +107,7 @@ export default function ProductCard({ product, useCatalogAccent = false }: Produ
             </Badge>
           </div>
         </div>
-        <div className="p-6 flex flex-col flex-grow">
+        <div className="p-4 sm:p-6 flex flex-col flex-grow min-w-0">
           <h3 className="font-serif text-xl font-semibold text-foreground mb-2 line-clamp-2">{product.name}</h3>
           <div className="mt-auto pt-4 flex items-center justify-between">
             <span className="font-bold text-2xl text-foreground">{formatARS(product.price)}</span>
@@ -134,15 +134,15 @@ export default function ProductCard({ product, useCatalogAccent = false }: Produ
       </div>
 
       <Dialog open={modalOpen} onOpenChange={setModalOpen}>
-        <DialogContent className="w-[94vw] max-w-4xl max-h-[90dvh] p-0 overflow-hidden bg-card border-none rounded-2xl md:rounded-3xl">
+        <DialogContent className="w-[94vw] max-w-4xl max-h-[90dvh] p-0 overflow-y-auto md:overflow-hidden bg-card border-none rounded-2xl md:rounded-3xl">
           <DialogTitle className="sr-only">{product.name}</DialogTitle>
           <DialogDescription className="sr-only">{product.description}</DialogDescription>
-          <div className="flex flex-col md:flex-row h-full">
-            <div className="w-full md:w-1/2 bg-secondary/20 relative aspect-[4/3] md:aspect-auto md:min-h-0 flex items-center justify-center">
+          <div className="flex flex-col md:flex-row h-full min-w-0">
+            <div className="w-full md:w-1/2 bg-secondary/20 relative h-[38dvh] sm:h-[42dvh] md:h-auto md:min-h-0 flex items-center justify-center overflow-hidden">
               {/* Gallery/Carrusel */}
               <ProductImageGallery images={product.images} name={product.name} />
             </div>
-            <div className="w-full md:w-1/2 flex flex-col p-5 sm:p-6 md:p-10 overflow-y-auto min-h-0">
+            <div className="w-full md:w-1/2 flex flex-col p-5 sm:p-6 md:p-10 overflow-y-auto min-h-0 min-w-0">
               <div className="flex gap-2 mb-6">
                 <Badge className={product.category === "integrales" ? "bg-primary text-primary-foreground hover:bg-primary" : "bg-accent text-accent-foreground hover:bg-accent"}>
                   {product.category.toUpperCase()}

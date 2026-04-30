@@ -130,7 +130,7 @@ export default function HomePage() {
         text="Descubrí nuestra variedad de panes integrales o Keto, pensados para acompañar cualquier momento. Sabores únicos, combinaciones que sorprenden y una textura casera que marca la diferencia. Desde opciones clásicas hasta panes saborizados, todo está hecho para disfrutar y compartir."
         imageSrc="/images/TRIOPANESKETO-1.jpg"
         imageAlt="Variedad de panes artesanales de sabores"
-        imageClassName="object-cover object-center h-[185%] -translate-y-48 md:-translate-y-80"
+        imageClassName="object-cover object-center md:h-[185%] md:-translate-y-48 lg:-translate-y-80"
       />
       
       <ProductHighlight 
@@ -151,7 +151,7 @@ export default function HomePage() {
           </div>
 
           <div className="mb-12 md:mb-14">
-            <div className="max-w-sm mx-auto">
+            <div className="w-full max-w-sm mx-auto min-w-0">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={featuredProducts[featuredIndex]?.id}
@@ -159,7 +159,7 @@ export default function HomePage() {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -30 }}
                   transition={{ duration: 0.35 }}
-                  className="h-full"
+                  className="h-full min-w-0"
                 >
                   {featuredProducts[featuredIndex] && (
                     <ProductCard product={featuredProducts[featuredIndex]} />

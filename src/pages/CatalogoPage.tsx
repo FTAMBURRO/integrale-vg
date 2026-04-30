@@ -148,7 +148,7 @@ export default function CatalogoPage() {
           </div>
 
           {/* Product Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 md:gap-x-8 gap-y-8 md:gap-y-12">
             <AnimatePresence mode="popLayout">
               {filteredProducts.map((product, index) => (
                 <motion.div
@@ -158,7 +158,7 @@ export default function CatalogoPage() {
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.9 }}
                   transition={{ duration: 0.4, delay: index * 0.05 }}
-                  className="h-full"
+                  className="h-full min-w-0"
                 >
                   <ProductCard product={product} useCatalogAccent />
                 </motion.div>
