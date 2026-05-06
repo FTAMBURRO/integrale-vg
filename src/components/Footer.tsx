@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import { SiInstagram, SiFacebook } from "react-icons/si";
+import { SiInstagram } from "react-icons/si";
 import { SITE_CONFIG } from "@/lib/constants";
 
 export default function Footer() {
@@ -57,15 +57,6 @@ export default function Footer() {
                 aria-label="Instagram"
               >
                 <SiInstagram size={18} />
-              </a>
-              <a 
-                href={SITE_CONFIG.facebookUrl} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-primary hover:text-white transition-all"
-                aria-label="Facebook"
-              >
-                <SiFacebook size={18} />
               </a>
             </div>
           </div>

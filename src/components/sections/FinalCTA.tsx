@@ -43,7 +43,7 @@ export default function FinalCTA() {
             className="rounded-full bg-white text-primary hover:bg-white/90 h-16 px-10 text-lg font-bold shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 group"
           >
             <a 
-              href={getWhatsAppLink("Hola! Me interesa conocer sus productos de Integrale")}
+              href={getWhatsAppLink()}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3"

@@ -22,7 +22,7 @@ export default function WhatsAppButton() {
       <Tooltip>
         <TooltipTrigger asChild>
           <a
-            href={getWhatsAppLink("Hola! Me interesa conocer sus productos de Integrale")}
+            href={getWhatsAppLink()}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center w-14 h-14 bg-[#25D366] hover:bg-[#20b858] text-white rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-110"
