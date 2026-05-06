@@ -6,7 +6,7 @@ export const DEFAULT_WHATSAPP_MESSAGE = "Hola Integrale! Quisiera hacer una cons
 export const SITE_CONFIG = {
   name: "Integrale VG",
   whatsapp: WHATSAPP_NUMBER,
-  orderUrl: `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(DEFAULT_WHATSAPP_MESSAGE)}`,
+  orderUrl: "https://pedido-integrale.vercel.app/",
   instagramUrl: "https://www.instagram.com/integralevg/",
   facebookUrl: "https://facebook.com/integrale_vg",
 };
