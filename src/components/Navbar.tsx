@@ -22,19 +22,22 @@ export default function Navbar() {
     setIsMobileMenuOpen(false);
   }, [location]);
 
-  const handleNavClick = (href: string) => {
-    setIsMobileMenuOpen(false);
-    if (href.startsWith("#") && location !== "/") {
-      // If we are on another page, let link handle it, but wait for navigation
-      setTimeout(() => {
-        const el = document.getElementById(href.substring(1));
-        el?.scrollIntoView({ behavior: "smooth" });
-      }, 100);
-    } else if (href.startsWith("#")) {
-      const el = document.getElementById(href.substring(1));
-      el?.scrollIntoView({ behavior: "smooth" });
+const handleNavClick = (href: string) => {
+  setIsMobileMenuOpen(false);
+
+  // Esperamos a que el Sheet termine de cerrarse
+  setTimeout(() => {
+    const id = href.replace("#", "");
+    const element = document.getElementById(id);
+
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
     }
-  };
+  }, 350);
+};
 
   const handleGoHome = () => {
     setIsMobileMenuOpen(false);
