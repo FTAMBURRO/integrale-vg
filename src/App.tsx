@@ -2,6 +2,7 @@ import { Switch, Route } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import HomePage from "@/pages/HomePage";
 import CatalogoPage from "@/pages/CatalogoPage";
 import NotFound from "@/pages/not-found";
@@ -24,6 +25,7 @@ function App() {
       <TooltipProvider>
         <Router />
         <Toaster />
+        <SpeedInsights />
       </TooltipProvider>
     </QueryClientProvider>
   );
