@@ -6,6 +6,7 @@ import { Product } from "@/lib/products";
 import { buildWhatsAppLink } from "@/lib/constants";
 import { formatARS } from "@/lib/utils";
 import { MessageCircle } from "lucide-react";
+import RichText from "@/components/RichText";
 
 
 interface ProductCardProps {
@@ -158,7 +159,7 @@ export default function ProductCard({ product, useCatalogAccent = false }: Produ
                 {formatARS(product.price)}
               </p>
               <p className="text-base sm:text-lg text-muted-foreground mb-6 md:mb-8 leading-relaxed">
-                {product.description}
+                <RichText text={product.description} />
               </p>
             </div>
           </div>
